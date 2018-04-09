@@ -1,0 +1,269 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Demos/DemoTargetSwitchingInterpolation.gd" type="Script" id=1]
+[ext_resource path="res://Demos/DebugArrow/Arrow.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://addons/alanscodelog.gimbalcontrol/GimbalControl.gd" type="Script" id=3]
+[ext_resource path="res://addons/alanscodelog.gimbalcontrol/icon.png" type="Texture" id=4]
+[ext_resource path="res://Demos/DebugArrow/DebugArrow.tscn" type="PackedScene" id=5]
+
+[sub_resource type="PlaneMesh" id=1]
+
+size = Vector2( 40, 40 )
+subdivide_width = 0
+subdivide_depth = 0
+
+[sub_resource type="SpatialMaterial" id=2]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo" ]
+
+[sub_resource type="CubeMesh" id=3]
+
+size = Vector3( 2, 2, 2 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[node name="Node" type="Node"]
+
+script = ExtResource( 1 )
+target_switch_speed = 300
+target = NodePath("Floor/GimbalControl")
+
+[node name="Floor" type="MeshInstance" parent="." index="0"]
+
+transform = Transform( 0.939045, 0.343796, 0, -0.343796, 0.939045, 0, 0, 0, 1, 0, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
+material/0 = SubResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="Target1" type="MeshInstance" parent="Floor" index="0"]
+
+editor/display_folded = true
+transform = Transform( 0.996192, 0.0871556, 0, -0.0871556, 0.996192, 0, 0, 0, 0.999999, -0.255686, 1.21764, 15 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Arrow" type="MeshInstance" parent="Floor/Target1" index="0"]
+
+transform = Transform( 0.5, 2.98023e-08, 0, -2.98023e-08, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Target2" type="MeshInstance" parent="Floor" index="1"]
+
+editor/display_folded = true
+transform = Transform( 0.694404, 0.14553, -0.704714, -0.40239, 0.890433, -0.212621, 0.596559, 0.431214, 0.676884, -6.05853, 3.73296, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Arrow" type="MeshInstance" parent="Floor/Target2" index="0"]
+
+transform = Transform( 0.499999, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Target3" type="MeshInstance" parent="Floor" index="2"]
+
+editor/display_folded = true
+transform = Transform( 0.82711, 0.562037, 0, -0.562037, 0.82711, 0, 0, 0, 0.999999, 11.0445, 7.34122, -11 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="Arrow" type="MeshInstance" parent="Floor/Target3" index="0"]
+
+transform = Transform( 0.499999, 0, 0, 1.49012e-08, 0.5, 0, 0, 0, 0.5, 0, -2, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = ExtResource( 2 )
+skeleton = NodePath("..")
+material/0 = null
+_sections_unfolded = [ "Transform" ]
+
+[node name="GimbalControl" type="Spatial" parent="Floor" index="3"]
+
+transform = Transform( 0.999998, -0.00189076, 0, 0.00189076, 0.999998, 0, 0, 0, 1, 0, 0, 0 )
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_icon": ExtResource( 4 )
+}
+target = null
+move_to_target_on_change = true
+interpolate_target_change = true
+interpolation_speed = 2
+allow_stop_move_interpolation = false
+rotate_globally = false
+move_speed = 2
+look_speed = 0.3
+zoom_multiplier = 3
+scroll_zoom_multiplier = 5
+default_distance = 10
+min_distance = 0
+max_distance = 50
+zoom_toggle_distances = [ 0, 20, 40 ]
+reverse_zoom_toggle_order = true
+first_person_distance = 1
+rotation_limit_up_in_degrees = 90
+rotation_limit_down_in_degrees = 90
+rotation_limit_right_in_degrees = 360
+rotation_limit_left_in_degrees = 360
+start_rotation_in_degrees = Vector2( 0, 30 )
+reverse_up_down = false
+reverse_left_right = false
+reverse_mouse_zoom = false
+enable_mouse_dragging = false
+hide_mouse = true
+enable_mouse_look = true
+disable_right_left = false
+emit_right_left = true
+look_right_action_name = "look_right"
+look_left_action_name = "look_left"
+look_up_action_name = "look_up"
+look_down_action_name = "look_down"
+look_click_action_name = "look_click"
+look_zoom_in_action_name = "look_zoom_in"
+look_zoom_out_action_name = "look_zoom_out"
+look_zoom_toggle_action_name = "look_zoom_toggle"
+
+[node name="Camera" type="Camera" parent="Floor/GimbalControl" index="0"]
+
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+
+[node name="DebugArrow" parent="." index="1" instance=ExtResource( 5 )]
+
+[node name="Arrow" parent="DebugArrow" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0 )
+
+
+[editable path="DebugArrow"]

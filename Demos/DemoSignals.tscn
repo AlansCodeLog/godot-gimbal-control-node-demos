@@ -1,0 +1,180 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Demos/Target.gd" type="Script" id=1]
+[ext_resource path="res://addons/alanscodelog.gimbalcontrol/GimbalControl.gd" type="Script" id=2]
+[ext_resource path="res://addons/alanscodelog.gimbalcontrol/icon.png" type="Texture" id=3]
+[ext_resource path="res://Demos/HUD.tscn" type="PackedScene" id=4]
+
+[sub_resource type="PlaneMesh" id=1]
+
+size = Vector2( 2, 2 )
+subdivide_width = 0
+subdivide_depth = 0
+
+[sub_resource type="SpatialMaterial" id=2]
+
+render_priority = 0
+flags_transparent = false
+flags_unshaded = false
+flags_vertex_lighting = false
+flags_no_depth_test = false
+flags_use_point_size = false
+flags_world_triplanar = false
+flags_fixed_size = false
+flags_albedo_tex_force_srgb = false
+vertex_color_use_as_albedo = false
+vertex_color_is_srgb = false
+params_diffuse_mode = 0
+params_specular_mode = 0
+params_blend_mode = 0
+params_cull_mode = 0
+params_depth_draw_mode = 0
+params_line_width = 1.0
+params_point_size = 1.0
+params_billboard_mode = 0
+params_grow = false
+params_use_alpha_scissor = false
+albedo_color = Color( 1, 1, 1, 1 )
+metallic = 0.0
+metallic_specular = 0.5
+metallic_texture_channel = 0
+roughness = 0.0
+roughness_texture_channel = 0
+emission_enabled = false
+normal_enabled = false
+rim_enabled = false
+clearcoat_enabled = false
+anisotropy_enabled = false
+ao_enabled = false
+depth_enabled = false
+subsurf_scatter_enabled = false
+transmission_enabled = false
+refraction_enabled = false
+detail_enabled = false
+uv1_scale = Vector3( 1, 1, 1 )
+uv1_offset = Vector3( 0, 0, 0 )
+uv1_triplanar = false
+uv1_triplanar_sharpness = 1.0
+uv2_scale = Vector3( 1, 1, 1 )
+uv2_offset = Vector3( 0, 0, 0 )
+uv2_triplanar = false
+uv2_triplanar_sharpness = 1.0
+proximity_fade_enable = false
+distance_fade_enable = false
+_sections_unfolded = [ "Albedo" ]
+
+[sub_resource type="CubeMesh" id=3]
+
+size = Vector3( 2, 2, 2 )
+subdivide_width = 0
+subdivide_height = 0
+subdivide_depth = 0
+
+[node name="Node" type="Node" index="0"]
+
+[node name="Floor" type="MeshInstance" parent="." index="0"]
+
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 1 )
+skeleton = NodePath("..")
+material/0 = SubResource( 2 )
+_sections_unfolded = [ "Transform", "material" ]
+
+[node name="Target" type="MeshInstance" parent="." index="1"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0 )
+layers = 1
+material_override = null
+cast_shadow = 1
+extra_cull_margin = 0.0
+use_in_baked_light = false
+lod_min_distance = 0.0
+lod_min_hysteresis = 0.0
+lod_max_distance = 0.0
+lod_max_hysteresis = 0.0
+mesh = SubResource( 3 )
+skeleton = NodePath("..")
+material/0 = null
+script = ExtResource( 1 )
+
+[node name="GimbalControl" type="Spatial" parent="Target" index="0"]
+
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0 )
+script = ExtResource( 2 )
+__meta__ = {
+"_editor_icon": ExtResource( 3 )
+}
+target = null
+move_to_target_on_change = true
+interpolate_target_change = true
+interpolation_speed = 2
+allow_stop_move_interpolation = false
+rotate_globally = false
+move_speed = 2
+look_speed = 0.3
+zoom_multiplier = 3
+scroll_zoom_multiplier = 5
+default_distance = 10
+min_distance = 0
+max_distance = 50
+zoom_toggle_distances = [ 0, 20, 40 ]
+reverse_zoom_toggle_order = true
+first_person_distance = 1
+rotation_limit_up_in_degrees = 90
+rotation_limit_down_in_degrees = 90
+rotation_limit_right_in_degrees = 360
+rotation_limit_left_in_degrees = 360
+start_rotation_in_degrees = Vector2( 0, 30 )
+reverse_up_down = false
+reverse_left_right = false
+reverse_mouse_zoom = false
+enable_mouse_dragging = false
+hide_mouse = true
+enable_mouse_look = true
+disable_right_left = true
+emit_right_left = true
+look_right_action_name = "look_right"
+look_left_action_name = "look_left"
+look_up_action_name = "look_up"
+look_down_action_name = "look_down"
+look_click_action_name = "look_click"
+look_zoom_in_action_name = "look_zoom_in"
+look_zoom_out_action_name = "look_zoom_out"
+look_zoom_toggle_action_name = "look_zoom_toggle"
+
+[node name="Camera" type="Camera" parent="Target/GimbalControl" index="0"]
+
+transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
+keep_aspect = 1
+cull_mask = 1048575
+environment = null
+h_offset = 0.0
+v_offset = 0.0
+doppler_tracking = 0
+projection = 0
+current = false
+fov = 70.0
+size = 1.0
+near = 0.05
+far = 100.0
+
+[node name="HUD" parent="." index="2" instance=ExtResource( 4 )]
+
+[connection signal="first_person_entered" from="Target/GimbalControl" to="HUD" method="_on_first_person_entered"]
+
+[connection signal="first_person_exited" from="Target/GimbalControl" to="HUD" method="_on_first_person_exited"]
+
+[connection signal="look_left" from="Target/GimbalControl" to="Target" method="_on_look_left"]
+
+[connection signal="look_right" from="Target/GimbalControl" to="Target" method="_on_look_right"]
+
+
