@@ -65,7 +65,7 @@ _sections_unfolded = [ "Albedo" ]
 
 [sub_resource type="CubeMesh" id=3]
 
-size = Vector3( 0.5, 0.5, 0.5 )
+size = Vector3( 1, 1, 1 )
 subdivide_width = 0
 subdivide_height = 0
 subdivide_depth = 0
@@ -80,8 +80,11 @@ subdivide_depth = 0
 [node name="Node" type="Node"]
 
 script = ExtResource( 1 )
-target_switch_speed = 100
-target = NodePath("Floor/Center/GimbalControl")
+target_switch_speed = 200
+target_move_speed_in_degrees = 0.5
+move_target = true
+rotate_same_side = false
+target = NodePath("Floor/GimbalControl")
 
 [node name="Floor" type="MeshInstance" parent="." index="0"]
 
@@ -100,8 +103,9 @@ skeleton = NodePath("..")
 material/0 = SubResource( 2 )
 _sections_unfolded = [ "Transform", "material" ]
 
-[node name="Center" type="MeshInstance" parent="Floor" index="0"]
+[node name="Target" type="MeshInstance" parent="Floor" index="0"]
 
+transform = Transform( 0.707107, -2.98023e-08, 0.707107, 2.98023e-08, 1, 0, -0.707107, 0, 0.707107, 0, 0, 0 )
 layers = 1
 material_override = null
 cast_shadow = 1
@@ -116,18 +120,20 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="GimbalControl" type="Spatial" parent="Floor/Center" index="0"]
+[node name="GimbalControl" type="Spatial" parent="Floor" index="1"]
 
 script = ExtResource( 2 )
 _sections_unfolded = [ "Transform", "Visibility" ]
 __meta__ = {
 "_editor_icon": ExtResource( 3 )
 }
-target = null
+target = NodePath("../Target")
 move_to_target_on_change = true
 interpolate_target_change = true
-interpolation_speed = 2
 allow_stop_move_interpolation = true
+interpolate_set_rotation_to = true
+allow_stop_rotation_interpolation = true
+interpolation_speed = 0.5
 rotate_globally = false
 move_speed = 2
 look_speed = 0.3
@@ -161,7 +167,7 @@ look_zoom_in_action_name = "look_zoom_in"
 look_zoom_out_action_name = "look_zoom_out"
 look_zoom_toggle_action_name = "look_zoom_toggle"
 
-[node name="Camera" type="Camera" parent="Floor/Center/GimbalControl" index="0"]
+[node name="Camera" type="Camera" parent="Floor/GimbalControl" index="0"]
 
 transform = Transform( 10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0 )
 keep_aspect = 1
@@ -177,7 +183,7 @@ size = 1.0
 near = 0.05
 far = 100.0
 
-[node name="MeshInstance" type="MeshInstance" parent="Floor/Center/GimbalControl" index="1"]
+[node name="MeshInstance" type="MeshInstance" parent="Floor/GimbalControl" index="1"]
 
 transform = Transform( 1, -1.16415e-10, 0, 1.16415e-10, 1, 0, 0, 0, 1, 0, 0, 0 )
 layers = 1
@@ -194,7 +200,7 @@ skeleton = NodePath("..")
 material/0 = null
 _sections_unfolded = [ "Transform" ]
 
-[node name="Arrow" type="MeshInstance" parent="Floor/Center/GimbalControl/MeshInstance" index="0"]
+[node name="Arrow" type="MeshInstance" parent="Floor/GimbalControl/MeshInstance" index="0"]
 
 transform = Transform( 0.5, -5.82077e-11, 5.82076e-11, -5.82077e-11, -2.18557e-08, 0.5, -5.82077e-11, -0.5, -2.18557e-08, 0, 0, 2 )
 layers = 1

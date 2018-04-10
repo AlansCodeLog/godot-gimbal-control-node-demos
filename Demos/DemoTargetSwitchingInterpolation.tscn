@@ -71,7 +71,7 @@ subdivide_width = 0
 subdivide_height = 0
 subdivide_depth = 0
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 script = ExtResource( 1 )
 target_switch_speed = 300
@@ -209,14 +209,16 @@ __meta__ = {
 target = null
 move_to_target_on_change = true
 interpolate_target_change = true
+allow_stop_move_interpolation = true
+interpolate_set_rotation_to = true
+allow_stop_rotation_interpolation = true
 interpolation_speed = 2
-allow_stop_move_interpolation = false
 rotate_globally = false
 move_speed = 2
 look_speed = 0.3
 zoom_multiplier = 3
 scroll_zoom_multiplier = 5
-default_distance = 10
+default_distance = 4
 min_distance = 0
 max_distance = 50
 zoom_toggle_distances = [ 0, 20, 40 ]
